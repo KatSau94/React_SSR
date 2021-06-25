@@ -1,6 +1,6 @@
 import React from "react";
 
 export const Header = () => {
-    return <div>Hello React</div>;
+    return <h1>Hello React</h1>;
     
 };
