@@ -24,7 +24,7 @@ module.exports = {
         ],
         
     },
-    mode: 'development',
+    mode: NODE_ENV ? NODE_ENV : 'development',
     externals: [nodeExternals()],
     optimization: {
         minimize: false
