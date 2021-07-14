@@ -1,5 +1,6 @@
 import { react } from "@babel/types";
 import React from "react";
+import ReactDOM from "react-dom";
 import type {ComponentType} from 'react';
 
 // Задание 1. Напишите тип функции, конкатенирующей две строки
@@ -81,13 +82,14 @@ interface IProps {
 
 type TMyType<T>= T extends ((props: infer R) => JSX.Element) ? (R extends object ? TMyType<R> : R) : never;
 
-type TMyType2<T> = T extends React.ComponentType<infer R> ? R : T;
+type TMyType2<T> = T extends React.ComponentType<infer P> ? P : never;
 
 type TMyType3<T extends React.ComponentType> = T extends ((props: infer R) => JSX.Element) ? R : never;
 
-//const t = TMyType3<typeof HomeComponent>;
+//const t = TMyType2<typeof HomeComponent>;
 
-function Test() {
+
+function Test(): JSX.Element {
     return <div />;
   }
 
@@ -97,15 +99,12 @@ const a = typeof Test;
 
 type TDivElement = JSX.IntrinsicElements['div'];
 
-type TGetJSXPropsProp<T> = {
-    
-}
-
+type TGetJSXPropsProp<T extends keyof JSX.IntrinsicElements> = JSX.IntrinsicElements[T] extends React.DetailedHTMLProps<infer P, any> ? P : never;
 type TDivProps = TGetJSXPropsProp<'div'>
 
-const props: TDivElement = {
+const props: TDivProps = {
 
-    some: '1233', // throw error потому что не содержится в атрибутах div
+    //some: '1233', // throw error потому что не содержится в атрибутах div
 
     className: 'handler' // не выкидывает ошибку так как валидно для div элемента
 

@@ -3,6 +3,7 @@ const nodeExternals = require('webpack-node-externals');
 const NODE_ENV = process.env.NODE_ENV;
 const IS_DEV = NODE_ENV === 'development';
 const IS_PROD = NODE_ENV === 'production';
+const GLOBAL_CSS_REGEXP = /\.global\.css$/;
 
 module.exports = {
 
@@ -36,7 +37,12 @@ module.exports = {
                         }
                         
                     }
-                ]
+                ],
+                exclude: GLOBAL_CSS_REGEXP
+            },
+            {
+                test: GLOBAL_CSS_REGEXP,
+                use: [ 'css-loader']
             }
         ],
         

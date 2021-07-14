@@ -254,4 +254,8 @@ type FnReturnType<T> = T extends ((...args: any[])=> infer R) ? R : never;
 type FnParametersType<T> = T extends ((...args: infer R) => any) ? R : never;
 
 type TRetuenType = FnReturnType<typeof createrThenZero>;
-type TArgsType = FnParametersType<typeof createrThenZero>;
+type TArgsType = typeof createrThenZero;
+
+type MyPartial2<T> = {
+    [N in keyof T]?: T[N] extends object ? MyPartial2<T[N]> : T[N]
+}

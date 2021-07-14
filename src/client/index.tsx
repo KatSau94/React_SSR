@@ -1,4 +1,4 @@
-import { Header } from "../shared/Header";
+import { App } from "../App";
 import ReactDOM from "react-dom";
 
-ReactDOM.hydrate(<Header />, document.getElementById("react_root"));
+ReactDOM.hydrate(<App />, document.getElementById("react_root"));
