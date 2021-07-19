@@ -80,13 +80,9 @@ interface IProps {
 
 }
 
-type TMyType<T>= T extends ((props: infer R) => JSX.Element) ? (R extends object ? TMyType<R> : R) : never;
+type TMyType<T> = T extends React.ComponentType<infer P> ? P : never;
 
-type TMyType2<T> = T extends React.ComponentType<infer P> ? P : never;
-
-type TMyType3<T extends React.ComponentType> = T extends ((props: infer R) => JSX.Element) ? R : never;
-
-//const t = TMyType2<typeof HomeComponent>;
+type t = TMyType<typeof HomeComponent>;
 
 
 function Test(): JSX.Element {
